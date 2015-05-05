@@ -328,8 +328,11 @@ en arrière dans notre historique.
     
 Auteur
 =======
-
 Olivier Lafleur ([olivier.lafleur@gmail.com])
+
+Les corrections et suggestions pour améliorer ce document sont très 
+appréciées. Vous pourrez trouver la dernière version de ce document à l'adresse 
+[https://github.com/dinfcll/doc-git/]
 
 Ce contenu est lui aussi mis à votre disposition selon les termes de la 
 [Licence Creative Commons Attribution 4.0 International] CC-BY.
@@ -345,3 +348,4 @@ contenu sous licence Creative Commons.
 [olivier.lafleur@gmail.com]: mailto:olivier.lafleur@gmail.com
 [une bande dessinée]: http://www.phdcomics.com/comics/archive.php?comicid=1531
 [Piled Higher and Deeper]: http://phdcomics.com
+[https://github.com/dinfcll/doc-git/]: https://github.com/dinfcll/doc-git/
