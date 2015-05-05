@@ -25,11 +25,13 @@
 </ul></li>
 <li><a href="#créer-un-dépôt">Créer un dépôt</a></li>
 <li><a href="#suivi-des-modifications">Suivi des modifications</a></li>
+<li><a href="#explorer-lhistorique">Explorer l’historique</a></li>
 <li><a href="#auteur">Auteur</a></li>
 </ul>
 </div>
 <h1 id="introduction">Introduction</h1>
 <p>Ce document se veut une introduction au système de gestion de versions décentralisé <a href="http://git-scm.com">git</a>. Nous utiliserons l’exemple de git, mais les principes présentés pourraient aussi bien être appliqués à d’autres systèmes du genre comme Mercurial ou BitKeeper.</p>
+<p>Ce document ne veut absolument pas complet quand à l’utilisation de git. L’idée est de présenter les concepts et les commandes de base qui permettent de fonctionner au jour le jour avec un système de gestion de versions. Au fil du temps, vous pourrez par la suite explorer les autres possibilités de git en découvrant graduellement ses autres fonctionnalités, qui peuvent être très puissantes.</p>
 <h1 id="pourquoi-utiliser-git">Pourquoi utiliser git?</h1>
 <p>Lorsque l’on développe du code, il n’est pas rare que l’on soit plusieurs à vouloir travailler sur un même bout de code. Cependant, cela peut devenir problématique lorsque l’on veut changer des bouts de code à des endroits différents.</p>
 <p>En utilisant le courriel ou une clé USB on peut s’échanger des bouts de code, mais cela devient rapidement très complexe et il est facile de faire des erreurs lors de l’intégration du code d’un collègue dans le sien.</p>
@@ -168,6 +170,26 @@ $ git commit -m &quot;Ajoute des vers au poème&quot;
 [master d3a16e0] Ajoute des vers au poème
  1 file changed, 4 insertions(+)
  </code></pre>
+<p>On peut donc maintenant afficher l’historique de nos <em>commits</em> :</p>
+<pre><code>$ git log
+commit d3a16e0fc131c38580e4751897aeda1168ea9082
+Author: Olivier Lafleur &lt;olivier.lafleur@gmail.com&gt;
+Date:   Tue May 5 10:52:01 2015 -0400
+
+    Ajoute des vers au poème
+
+commit bef8ac358d77d6e57833947f96a16199bba885ee
+Author: Olivier Lafleur &lt;olivier.lafleur@gmail.com&gt;
+Date:   Tue May 5 09:51:56 2015 -0400
+
+    Commencer l&#39;écriture du poème</code></pre>
+<p>Et si on demande à git son statut, il nous répond:</p>
+<pre><code>$ git status
+On branch master
+nothing to commit, working directory clean</code></pre>
+<p>Pour récapituler, lorsque nous voulons ajouter des changements à notre dépôt, nous devons d’abord ajouter les fichiers changés (<code>git add</code>) et ensuite <em>commiter</em> les changements au dépôt (<code>git commit</code>).</p>
+<h1 id="explorer-lhistorique">Explorer l’historique</h1>
+<p>Si nous voulons voir ce que nous avons changé et quand, il est possible de revenir en arrière dans notre historique.</p>
 <h1 id="auteur">Auteur</h1>
 <p>Olivier Lafleur (<script type="text/javascript">
 <!--

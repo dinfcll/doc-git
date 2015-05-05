@@ -10,6 +10,13 @@ décentralisé [git]. Nous utiliserons l'exemple de git, mais les principes
 présentés pourraient aussi bien être appliqués à d'autres systèmes du 
 genre comme Mercurial ou BitKeeper.
 
+Ce document ne veut absolument pas complet quand à l'utilisation de git. 
+L'idée est de présenter les concepts et les commandes de base qui 
+permettent de fonctionner au jour le jour avec un système de gestion de 
+versions. Au fil du temps, vous pourrez par la suite explorer les autres 
+possibilités de git en découvrant graduellement ses autres fonctionnalités, 
+qui peuvent être très puissantes.
+
 Pourquoi utiliser git?
 ===========
 Lorsque l'on développe du code, il n'est pas rare que l'on soit plusieurs à 
@@ -288,8 +295,37 @@ Réparons cette erreur:
     [master d3a16e0] Ajoute des vers au poème
      1 file changed, 4 insertions(+)
 	 
+On peut donc maintenant afficher l'historique de nos *commits* :
 
+    $ git log
+    commit d3a16e0fc131c38580e4751897aeda1168ea9082
+    Author: Olivier Lafleur <olivier.lafleur@gmail.com>
+    Date:   Tue May 5 10:52:01 2015 -0400
 
+        Ajoute des vers au poème
+
+    commit bef8ac358d77d6e57833947f96a16199bba885ee
+    Author: Olivier Lafleur <olivier.lafleur@gmail.com>
+    Date:   Tue May 5 09:51:56 2015 -0400
+
+        Commencer l'écriture du poème
+
+Et si on demande à git son statut, il nous répond:
+
+    $ git status
+    On branch master
+    nothing to commit, working directory clean
+
+Pour récapituler, lorsque nous voulons ajouter des changements à notre dépôt, nous devons 
+d'abord ajouter les fichiers changés (`git add`) et ensuite *commiter* les changements 
+au dépôt (`git commit`).
+
+Explorer l'historique
+=====================
+Si nous voulons voir ce que nous avons changé et quand, il est possible de revenir 
+en arrière dans notre historique.
+
+    
 Auteur
 =======
 
