@@ -19,6 +19,9 @@
 <ul>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#pourquoi-utiliser-git">Pourquoi utiliser git?</a></li>
+<li><a href="#mise-en-place-de-git">Mise en place de git</a><ul>
+<li><a href="#comment-git-fonctionne">Comment git fonctionne</a></li>
+</ul></li>
 <li><a href="#auteur">Auteur</a></li>
 </ul>
 </div>
@@ -32,8 +35,25 @@
 <ul>
 <li><p>Rien qui est sauvegardé (on dit faire un <em>commit</em>) n’est perdu. Cela veut dire que l’on peut l’utiliser comme la fonctionnalité pour revenir en arrière (<em>undo</em>) d’un éditeur. Par ailleurs, puisque toutes les anciennes versions sont sauvegardées, il est toujours possible de revenir dans le temps et de se replacer dans un état passé.</p></li>
 <li><p>Nous avons une liste des changements qui ont été faits, par qui et quand. On sait donc à qui poser nos questions plus tard.</p></li>
-<li><p>C’est difficile (mais pas impossible) de réécrire par-dessus les changements de quelqu’un. Le système de gestion de versions avertit automatiquement l’usager lorqu’il y a un conflit entre deux changements effectués sur la même ligne.</p></li>
+<li><p>C’est difficile (mais pas impossible) de réécrire par-dessus les changements de quelqu’un. Le système de gestion de versions avertit automatiquement l’usager lorqu’il y a un conflit entre deux changements effectués sur la même ligne par deux personnes différentes.</p></li>
 </ul>
+<p>La gestion de versions est essentielle pour tous les projets de développement logiciel significatifs, et la plupart des programmeurs l’utilisent pour leurs petits projets aussi. Ce n’est pas non plus que pour du logiciel: les livres, les notes de cours (comme celles-ci), les petits jeu de données et tout ce qui change à travers le temps et a besoin d’être partagé peut (et devrait) être stocké dans un système de gestion de versions.</p>
+<h1 id="mise-en-place-de-git">Mise en place de git</h1>
+<p>Nous commencerons par explorer comment la gestion de versions peut être utilisée pour garder une trace de ce qu’une personne a fait, et quand. Même si vous ne collaborez pas avec d’autres personnes, la gestion de versions est beaucoup mieux pour ça. On peut donc éviter de se retrouver avec des noms de fichiers laborieux incluant des VERSION_FINALE_2_olivier ou autres noms du genre, comme illustré dans <a href="http://www.phdcomics.com/comics/archive.php?comicid=1531">une bande dessinée</a> du <em>comic</em> en ligne <a href="http://phdcomics.com">Piled Higher and Deeper</a>.</p>
+<p>Nous avons tous déjà été dans cette situation par le passé. Il est ridicule de se retrouver avec de multiples versions presque identiques d’un même document.</p>
+<p>Les systèmes de gestion de version commencent avec une version de base du document et sauvegardent seulement les changements (les <em>diff</em>) que vous avez faits à chaque étape.</p>
+<div class="figure">
+<img src="seq.png" alt="Le document de base et ses changements" />
+<p class="caption">Le document de base et ses changements</p>
+</div>
+<p>À partir du moment où on commence à voir les changements comme étant séparés du document lui-même, on peut penser à “appliquer” des changements différents sur le document de base et ainsi obtenir des versions différentes du document. Par exemple, deux utilisateurs peuvent faire des changements indépendants sur le même document.</p>
+<div class="figure">
+<img src="versions.png" alt="Des changements en parallèle" />
+<p class="caption">Des changements en parallèle</p>
+</div>
+<h2 id="comment-git-fonctionne">Comment git fonctionne</h2>
+<p>Un système de gestion de versions est un outil</p>
+<pre><code>git config --global user.name &quot;Olivier Lafleur&quot;</code></pre>
 <h1 id="auteur">Auteur</h1>
 <p>Olivier Lafleur (<script type="text/javascript">
 <!--
