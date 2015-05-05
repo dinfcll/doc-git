@@ -104,8 +104,8 @@ Créer un dépôt
 Une fois que git est configuré, nous pouvons commencer à l'utiliser. Créons un répertoire 
 pour nos fichiers:
 
-    $ mkdir planètes
-	$ cd planètes
+    $ mkdir poésie
+	$ cd poésie
 
 et disons à git de créer un dépôt - un endroit où git peut stocker les anciennes versions de nos 
 fichiers:
@@ -118,6 +118,176 @@ caché appelé `.git`:
 
     $ ls -a
 	.   ..  .git
+
+Git stocke l'information sur le projet dans ce sous-répertoire spécial. Si jamais nous le 
+supprimons, nous perdrons l'historique de ce projet.
+
+On peut s'assurer que tout est mis en place de façon appropriée en demandant à git de nous dire 
+quel est le statut du projet:
+
+    $ git status
+	On branch master
+	Initial commit
+	nothing to commit (create/copy files and use "git add" to track)
+	
+Suivi des modifications
+=======================
+Créons tout d'abord un fichier appelé `soir_dhiver.txt` qui contiendra de la poésie. Vous pouvez utiliser 
+l'éditeur de votre choix pour ce faire. L'important est qu'il soit créé dans le répertoire `poésie` 
+créé plus haut.
+
+Entrez le texte suivant dans le fichier `soir_dhiver.txt`:
+
+    Ah! comme la neige a neigé!
+
+`soir_dhiver.txt` contient maintenant une seule ligne. Si on demande le statut du projet encore une fois, 
+git nous dit qu'il a remarqué le nouveau fichier:
+
+    $ git status	
+	On branch master
+	Initial commit
+	Untracked files:
+	  (use "git add <file>..." to include in what will be committed)
+	        soir_dhiver.txt
+	nothing added to commit but untracked files present (use "git add" to track)
+
+Le message *Untracked files* avec les noms de fichiers écrits en rouge 
+signifie qu'il y a un fichier dans le répertoire dont git ne tient pas compte. 
+Nous pouvons lui dire de le surveiller en utilisant la commande `git add`:
+
+    $ git add soir_dhiver.txt
+	
+et s'assurer que c'est bien ce qui s'est passé:
+
+    $ git status
+    On branch master
+	Initial commit
+	Changes to be committed:
+	(use "git rm --cached <file>..." to unstage)
+
+        new file:   soir_dhiver.txt
+		  
+On voit que le nom de fichier est maintenant indiqué en vert. Git sait donc qu'il est 
+supposé de surveiller `soir_dhiver.txt`, mais il n'a pas encore 
+enregistré ces changements comme des *commits*. Pour lui dire de le faire, nous avons 
+besoin d'exécuter une commande de plus:
+
+    $ git commit -m "Commencer l'écriture du poème"
+    [master (root-commit) bef8ac3] Commencer l'écriture du poème
+     1 file changed, 1 insertion(+)
+     create mode 100644 soir_dhiver.txt
+
+Quand on exécute la commande `git commit`, git prend tout ce qu'on lui a dit de sauvegarder 
+lorsqu'on a utilisé la commande `git add` et le stocke comme une copie permanente à l'intérieur 
+du répertoire spécial `.git`. Cette copie permanente est appelée une révision et son 
+identifiant court est `bef8ac3` (votre révision aura un autre identifiant.)
+
+On utilise le flag `-m` (pour "message") pour enregistrer un commentaire court, descriptif et 
+spécifique qui nous aidera plus tard à nous rappeler ce que nous avons fait comme changement, et 
+pourquoi. Si on exécute `git commit` sans l'option `-m`, git lancera l'éditeur par défaut afin 
+d'écrire un plus long message, si on le souhaite.
+
+Un bon message de *commit* commence avec un bref résumé (moins de 50 caractères) des changements 
+apportés dans ce *commit*. Si vous voulez donner plus de détails, ajoutez une ligne blanche 
+entre la ligne de résumé et les remarques additionnelles.
+
+Si on fait `git status` maintenant:
+
+    $ git status
+	On branch master
+	nothing to commit, working directory clean
+	
+cela nous dit que tout est à jour. Si l'on veut savoir ce que l'on a fait récemment, on peut 
+demander à git de nous montrer l'historique du projet en utilisant `git log`:
+
+    $ git log
+	commit bef8ac358d77d6e57833947f96a16199bba885ee
+	Author: Olivier Lafleur <olivier.lafleur@gmail.com>
+	Date:   Tue Mayh 5 09:51:56 2015 -0400
+	    Commencer l'écriture du poème
+		
+La commande `git log` fait une liste de toutes les révisions faites dans ce dépôt en ordre 
+chronologique inverse. Pour chaque révision, il est indiqué l'identifiant complet (qui commence 
+avec les mêmes caractères que l'identifiant court affiché par la commande `git commit`réalisée 
+plus tôt), l'auteur de la révision, le moment où elle a été créée et le message de *log* qui a 
+été donné lorsque la révision a été créée.
+
+En ce moment, si on exécute `ls`, on ne voit encore qu'un seul fichier, `soir_dhiver.txt`. C'est 
+parce que git sauvegarde les informations sur l'historique des fichiers dans le répertoire spécial 
+`.git` dont on a parlé plus tôt pour ne pas que notre système de fichiers devienne encombré 
+(et pour pas que l'on modifie ou supprime une ancienne version).
+
+Maintenant, rajoutons des vers dans notre poème.
+
+    Ma vitre est un jardin de givre.
+    Ah! comme la neige a neigé!
+    Qu'est-ce que le spasme de vivre
+    Ô la douleur que j'ai, que j'ai!
+
+Lorsque l'on exécute `git status`, il nous dit qu'un fichier qu'il connaît a été modifié:
+
+    $ git status
+	On branch master
+	Changes not staged for commit:
+	  (use "git add <file>..." to update what will be committed)
+	  (use "git checkout -- <file>..." to discard changes in working directory)
+	  
+	        modified:   soir_dhiver.txt
+			
+	no changes added to commit (use "git add" and/or "git commit -a")
+	
+La dernière ligne est ce qui est important: aucun changement ajouté au *commit*. Nous avons changé 
+ce fichier, mais n'avons pas dit à git que nous voulons sauvegarder ces changements (ce que l'on 
+fait avec `git add`). Faisons cela. C'est une bonne pratique de toujours passer en revue les changements 
+effectués avant de les sauvegarder. On fait cela en utilisant `git diff`. Cela nous montre les différences 
+entre l'état courant du fichier et la plus récente version sauvegardée:
+
+    $ git diff
+	diff --git a/soir_dhiver.txt b/soir_dhiver.txt
+	index 45a1c88..be81340 100644
+	--- a/soir_dhiver.txt
+	+++ b/soir_dhiver.txt
+	@@ -1 +1,5 @@
+	Ah! comme la neige a neigé!
+	+Ma vitre est un jardin de givre.
+	+Ah! comme la neige a neigé!
+	+Qu'est-ce que le spasme de vivre
+	+Ô la douleur que j'ai, que j'ai!
+
+La sortie est cryptique parce qu'il s'agit en fait d'une série de commandes pour des éditeurs ou des commandes 
+Unix comme `patch` qui leur dit comment reconstruire un fichier à partir d'un autre fichier. Si on découpe 
+en petites parties:
+
+- La première ligne nous dit que git produit une sortie similaire à la commande Unix `diff`, qui compare 
+l'ancienne et la nouvelle version d'un fichier.
+
+- La deuxième ligne nous dit exactement quelles révisions du fichier est-ce que git compare: `45a1c88` et 
+`be81340` sont des étiquettes générées automatiquement pour ces révisions.
+
+- La troisième et la quatrième ligne nous disent le nom du fichier qui est changé.
+
+- Les lignes restantes sont les plus intéressantes. Ils nous montrent les différences effectives et les lignes 
+sur lesquelles elles sont. En particulier, le marqueur `+` dans la première colonne montre que nous ajoutons 
+des lignes.
+
+Après avoir passé en revue nos changements, c'est le temps de *commiter*:
+
+    $ git commit -m "Ajoute des vers au poème"
+    On branch master
+    Changes not staged for commit:
+	    
+		modified:   soir_dhiver.txt
+
+    no changes added to commit
+	
+Oups! Git ne veut pas *commiter* car nous n'avons pas utilisé `git add` en premier.
+Réparons cette erreur:
+
+    $ git add soir_dhiver.txt
+	$ git commit -m "Ajoute des vers au poème"
+	[master d3a16e0] Ajoute des vers au poème
+     1 file changed, 4 insertions(+)
+	 
 
 
 Auteur
