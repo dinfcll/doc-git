@@ -70,15 +70,60 @@ indépendants sur le même document.
 
 Comment git fonctionne
 ----------------------
-Un système de gestion de versions est un outil
+Un système de gestion de versions est un outil qui garde une trace de ces changements pour nous et 
+nous aide à amalgamer tous les changements ensemble. Un système comme git est conçu pour garder 
+de multiples changements synchronisés sur différents ordinateurs et serveurs. C'est pourquoi on 
+dit qu'il s'agit d'un système *distribué* (par opposition à SVN ou TFS qui sont des systèmes dits 
+centralisés).
 
-    git config --global user.name "Olivier Lafleur"
+Un dépôt (*repository* en anglais) est un ensemble de fichiers que nous voulons versionner.
+
+Avec git, chaque utilisateur qui veut faire un changement à un dépôt a sa propre copie des fichiers 
+dans ce dépôt, ainsi que sa copie des changements (les *commits*) qui ont été faits à ces fichiers. 
+Git garde les *commits* dans un répertoire caché avec les copies des fichiers.
+
+Première utilisation
+--------------------
+La première fois que l'on utilise git sur une nouvelle machine, nous avons besoin de configurer 
+quelques paramètres. Voici comment on procède (dans le terminal):
+
+    $ git config --global user.name "Olivier Lafleur"
+    $ git config --global user.email "olivier.lafleur@gmail.com"
+
+(Utilisez évidemment votre nom et votre adresse courriel à la place de mes informations.)
+
+Les commandes git sont écrites sous la forme `git verbe`, où `verbe` est ce que nous voulons faire. 
+Dans ce cas, nous donnons à git notre nom et notre adresse courriel, en lui disant que nous voulons 
+utiliser ces paramètres de façon globale (pour tous les projets sur cet ordinateur).
+
+Les commandes précédentes ont seulement besoin d'être exécutées une seule fois: le *flag* `--global` 
+dit à git d'utiliser ces paramètres pour tous les projets.
+
+Créer un dépôt
+==============
+Une fois que git est configuré, nous pouvons commencer à l'utiliser. Créons un répertoire 
+pour nos fichiers:
+
+    $ mkdir planètes
+	$ cd planètes
+
+et disons à git de créer un dépôt - un endroit où git peut stocker les anciennes versions de nos 
+fichiers:
+
+    $ git init
+
+Si nous utilisons `ls` pour montrer le contenu du répertoire, on dirait que rien n'a changé. Par 
+contre, si nous ajoutons le *flag* `-a` pour ton montrer, on voit que git a créé un répertoire 
+caché appelé `.git`:
+
+    $ ls -a
+	.   ..  .git
 
 
 Auteur
 =======
 
-Olivier Lafleur ([olivier.lafleur@cll.qc.ca])
+Olivier Lafleur ([olivier.lafleur@gmail.com])
 
 Ce contenu est lui aussi mis à votre disposition selon les termes de la 
 [Licence Creative Commons Attribution 4.0 International] CC-BY.
@@ -91,6 +136,6 @@ contenu sous licence Creative Commons.
 [git]: http://git-scm.com
 [Licence Creative Commons Attribution 4.0 International]: http://creativecommons.org/licenses/by/4.0/
 [Software Carpentry]: http://software-carpentry.org
-[olivier.lafleur@cll.qc.ca]: mailto:olivier.lafleur@cll.qc.ca
+[olivier.lafleur@gmail.com]: mailto:olivier.lafleur@gmail.com
 [une bande dessinée]: http://www.phdcomics.com/comics/archive.php?comicid=1531
 [Piled Higher and Deeper]: http://phdcomics.com

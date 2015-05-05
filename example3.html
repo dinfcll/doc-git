@@ -21,7 +21,9 @@
 <li><a href="#pourquoi-utiliser-git">Pourquoi utiliser git?</a></li>
 <li><a href="#mise-en-place-de-git">Mise en place de git</a><ul>
 <li><a href="#comment-git-fonctionne">Comment git fonctionne</a></li>
+<li><a href="#première-utilisation">Première utilisation</a></li>
 </ul></li>
+<li><a href="#créer-un-dépôt">Créer un dépôt</a></li>
 <li><a href="#auteur">Auteur</a></li>
 </ul>
 </div>
@@ -48,15 +50,32 @@
 </div>
 <p>À partir du moment où on commence à voir les changements comme étant séparés du document lui-même, on peut penser à “appliquer” des changements différents sur le document de base et ainsi obtenir des versions différentes du document. Par exemple, deux utilisateurs peuvent faire des changements indépendants sur le même document.</p>
 <h2 id="comment-git-fonctionne">Comment git fonctionne</h2>
-<p>Un système de gestion de versions est un outil</p>
-<pre><code>git config --global user.name &quot;Olivier Lafleur&quot;</code></pre>
+<p>Un système de gestion de versions est un outil qui garde une trace de ces changements pour nous et nous aide à amalgamer tous les changements ensemble. Un système comme git est conçu pour garder de multiples changements synchronisés sur différents ordinateurs et serveurs. C’est pourquoi on dit qu’il s’agit d’un système <em>distribué</em> (par opposition à SVN ou TFS qui sont des systèmes dits centralisés).</p>
+<p>Un dépôt (<em>repository</em> en anglais) est un ensemble de fichiers que nous voulons versionner.</p>
+<p>Avec git, chaque utilisateur qui veut faire un changement à un dépôt a sa propre copie des fichiers dans ce dépôt, ainsi que sa copie des changements (les <em>commits</em>) qui ont été faits à ces fichiers. Git garde les <em>commits</em> dans un répertoire caché avec les copies des fichiers.</p>
+<h2 id="première-utilisation">Première utilisation</h2>
+<p>La première fois que l’on utilise git sur une nouvelle machine, nous avons besoin de configurer quelques paramètres. Voici comment on procède (dans le terminal):</p>
+<pre><code>$ git config --global user.name &quot;Olivier Lafleur&quot;
+$ git config --global user.email &quot;olivier.lafleur@gmail.com&quot;</code></pre>
+<p>(Utilisez évidemment votre nom et votre adresse courriel à la place de mes informations.)</p>
+<p>Les commandes git sont écrites sous la forme <code>git verbe</code>, où <code>verbe</code> est ce que nous voulons faire. Dans ce cas, nous donnons à git notre nom et notre adresse courriel, en lui disant que nous voulons utiliser ces paramètres de façon globale (pour tous les projets sur cet ordinateur).</p>
+<p>Les commandes précédentes ont seulement besoin d’être exécutées une seule fois: le <em>flag</em> <code>--global</code> dit à git d’utiliser ces paramètres pour tous les projets.</p>
+<h1 id="créer-un-dépôt">Créer un dépôt</h1>
+<p>Une fois que git est configuré, nous pouvons commencer à l’utiliser. Créons un répertoire pour nos fichiers:</p>
+<pre><code>$ mkdir planètes
+$ cd planètes</code></pre>
+<p>et disons à git de créer un dépôt - un endroit où git peut stocker les anciennes versions de nos fichiers:</p>
+<pre><code>$ git init</code></pre>
+<p>Si nous utilisons <code>ls</code> pour montrer le contenu du répertoire, on dirait que rien n’a changé. Par contre, si nous ajoutons le <em>flag</em> <code>-a</code> pour ton montrer, on voit que git a créé un répertoire caché appelé <code>.git</code>:</p>
+<pre><code>$ ls -a
+.   ..  .git</code></pre>
 <h1 id="auteur">Auteur</h1>
 <p>Olivier Lafleur (<script type="text/javascript">
 <!--
-h='&#x63;&#108;&#108;&#46;&#x71;&#x63;&#46;&#x63;&#x61;';a='&#64;';n='&#x6f;&#108;&#x69;&#118;&#x69;&#x65;&#114;&#46;&#108;&#x61;&#102;&#108;&#x65;&#x75;&#114;';e=n+a+h;
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x6f;&#108;&#x69;&#118;&#x69;&#x65;&#114;&#46;&#108;&#x61;&#102;&#108;&#x65;&#x75;&#114;';e=n+a+h;
 document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
 // -->
-</script><noscript>&#x6f;&#108;&#x69;&#118;&#x69;&#x65;&#114;&#46;&#108;&#x61;&#102;&#108;&#x65;&#x75;&#114;&#32;&#x61;&#116;&#32;&#x63;&#108;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x71;&#x63;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x61;</noscript>)</p>
+</script><noscript>&#x6f;&#108;&#x69;&#118;&#x69;&#x65;&#114;&#46;&#108;&#x61;&#102;&#108;&#x65;&#x75;&#114;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;</noscript>)</p>
 <p>Ce contenu est lui aussi mis à votre disposition selon les termes de la <a href="http://creativecommons.org/licenses/by/4.0/">Licence Creative Commons Attribution 4.0 International</a> CC-BY.</p>
 <p>Par ailleurs, il est important de mentionner que le contenu de ce document est fortement inspiré du contenu des formations de l’organisme <em><a href="http://software-carpentry.org">Software Carpentry</a></em>, organisme à but non lucratif qui met disponible en ligne son contenu sous licence Creative Commons.</p>
 <div id="footer">
