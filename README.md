@@ -105,7 +105,7 @@ Une fois que git est configuré, nous pouvons commencer à l'utiliser. Créons u
 pour nos fichiers:
 
     $ mkdir poésie
-	$ cd poésie
+    $ cd poésie
 
 et disons à git de créer un dépôt - un endroit où git peut stocker les anciennes versions de nos 
 fichiers:
@@ -117,7 +117,7 @@ contre, si nous ajoutons le *flag* `-a` pour ton montrer, on voit que git a cré
 caché appelé `.git`:
 
     $ ls -a
-	.   ..  .git
+    .   ..  .git
 
 Git stocke l'information sur le projet dans ce sous-répertoire spécial. Si jamais nous le 
 supprimons, nous perdrons l'historique de ce projet.
@@ -126,9 +126,9 @@ On peut s'assurer que tout est mis en place de façon appropriée en demandant �
 quel est le statut du projet:
 
     $ git status
-	On branch master
-	Initial commit
-	nothing to commit (create/copy files and use "git add" to track)
+    On branch master
+    Initial commit
+    nothing to commit (create/copy files and use "git add" to track)
 	
 Suivi des modifications
 =======================
@@ -144,12 +144,12 @@ Entrez le texte suivant dans le fichier `soir_dhiver.txt`:
 git nous dit qu'il a remarqué le nouveau fichier:
 
     $ git status	
-	On branch master
-	Initial commit
-	Untracked files:
-	  (use "git add <file>..." to include in what will be committed)
-	        soir_dhiver.txt
-	nothing added to commit but untracked files present (use "git add" to track)
+    On branch master
+    Initial commit
+    Untracked files:
+    (use "git add <file>..." to include in what will be committed)
+            soir_dhiver.txt
+    nothing added to commit but untracked files present (use "git add" to track)
 
 Le message *Untracked files* avec les noms de fichiers écrits en rouge 
 signifie qu'il y a un fichier dans le répertoire dont git ne tient pas compte. 
@@ -161,9 +161,9 @@ et s'assurer que c'est bien ce qui s'est passé:
 
     $ git status
     On branch master
-	Initial commit
-	Changes to be committed:
-	(use "git rm --cached <file>..." to unstage)
+    Initial commit
+    Changes to be committed:
+    (use "git rm --cached <file>..." to unstage)
 
         new file:   soir_dhiver.txt
 		  
@@ -194,18 +194,18 @@ entre la ligne de résumé et les remarques additionnelles.
 Si on fait `git status` maintenant:
 
     $ git status
-	On branch master
-	nothing to commit, working directory clean
+    On branch master
+    nothing to commit, working directory clean
 	
 cela nous dit que tout est à jour. Si l'on veut savoir ce que l'on a fait récemment, on peut 
 demander à git de nous montrer l'historique du projet en utilisant `git log`:
 
     $ git log
-	commit bef8ac358d77d6e57833947f96a16199bba885ee
-	Author: Olivier Lafleur <olivier.lafleur@gmail.com>
-	Date:   Tue Mayh 5 09:51:56 2015 -0400
-	    Commencer l'écriture du poème
-		
+    commit bef8ac358d77d6e57833947f96a16199bba885ee
+    Author: Olivier Lafleur <olivier.lafleur@gmail.com>
+    Date:   Tue Mayh 5 09:51:56 2015 -0400
+        Commencer l'écriture du poème
+            
 La commande `git log` fait une liste de toutes les révisions faites dans ce dépôt en ordre 
 chronologique inverse. Pour chaque révision, il est indiqué l'identifiant complet (qui commence 
 avec les mêmes caractères que l'identifiant court affiché par la commande `git commit`réalisée 
@@ -227,14 +227,14 @@ Maintenant, rajoutons des vers dans notre poème.
 Lorsque l'on exécute `git status`, il nous dit qu'un fichier qu'il connaît a été modifié:
 
     $ git status
-	On branch master
-	Changes not staged for commit:
-	  (use "git add <file>..." to update what will be committed)
-	  (use "git checkout -- <file>..." to discard changes in working directory)
-	  
-	        modified:   soir_dhiver.txt
-			
-	no changes added to commit (use "git add" and/or "git commit -a")
+    On branch master
+    Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+      (use "git checkout -- <file>..." to discard changes in working directory)
+
+            modified:   soir_dhiver.txt
+	
+    no changes added to commit (use "git add" and/or "git commit -a")
 	
 La dernière ligne est ce qui est important: aucun changement ajouté au *commit*. Nous avons changé 
 ce fichier, mais n'avons pas dit à git que nous voulons sauvegarder ces changements (ce que l'on 
@@ -243,16 +243,16 @@ effectués avant de les sauvegarder. On fait cela en utilisant `git diff`. Cela 
 entre l'état courant du fichier et la plus récente version sauvegardée:
 
     $ git diff
-	diff --git a/soir_dhiver.txt b/soir_dhiver.txt
-	index 45a1c88..be81340 100644
-	--- a/soir_dhiver.txt
-	+++ b/soir_dhiver.txt
-	@@ -1 +1,5 @@
-	Ah! comme la neige a neigé!
-	+Ma vitre est un jardin de givre.
-	+Ah! comme la neige a neigé!
-	+Qu'est-ce que le spasme de vivre
-	+Ô la douleur que j'ai, que j'ai!
+    diff --git a/soir_dhiver.txt b/soir_dhiver.txt
+    index 45a1c88..be81340 100644
+    --- a/soir_dhiver.txt
+    +++ b/soir_dhiver.txt
+    @@ -1 +1,5 @@
+    Ah! comme la neige a neigé!
+    +Ma vitre est un jardin de givre.
+    +Ah! comme la neige a neigé!
+    +Qu'est-ce que le spasme de vivre
+    +Ô la douleur que j'ai, que j'ai!
 
 La sortie est cryptique parce qu'il s'agit en fait d'une série de commandes pour des éditeurs ou des commandes 
 Unix comme `patch` qui leur dit comment reconstruire un fichier à partir d'un autre fichier. Si on découpe 
@@ -275,8 +275,8 @@ Après avoir passé en revue nos changements, c'est le temps de *commiter*:
     $ git commit -m "Ajoute des vers au poème"
     On branch master
     Changes not staged for commit:
-	    
-		modified:   soir_dhiver.txt
+    
+        modified:   soir_dhiver.txt
 
     no changes added to commit
 	
@@ -284,8 +284,8 @@ Oups! Git ne veut pas *commiter* car nous n'avons pas utilisé `git add` en prem
 Réparons cette erreur:
 
     $ git add soir_dhiver.txt
-	$ git commit -m "Ajoute des vers au poème"
-	[master d3a16e0] Ajoute des vers au poème
+    $ git commit -m "Ajoute des vers au poème"
+    [master d3a16e0] Ajoute des vers au poème
      1 file changed, 4 insertions(+)
 	 
 

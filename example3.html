@@ -85,7 +85,7 @@ nothing to commit (create/copy files and use &quot;git add&quot; to track)</code
 On branch master
 Initial commit
 Untracked files:
-  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+(use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
         soir_dhiver.txt
 nothing added to commit but untracked files present (use &quot;git add&quot; to track)</code></pre>
 <p>Le message <em>Untracked files</em> avec les noms de fichiers écrits en rouge signifie qu’il y a un fichier dans le répertoire dont git ne tient pas compte. Nous pouvons lui dire de le surveiller en utilisant la commande <code>git add</code>:</p>
@@ -117,7 +117,7 @@ commit bef8ac358d77d6e57833947f96a16199bba885ee
 Author: Olivier Lafleur &lt;olivier.lafleur@gmail.com&gt;
 Date:   Tue Mayh 5 09:51:56 2015 -0400
     Commencer l&#39;écriture du poème
-    </code></pre>
+        </code></pre>
 <p>La commande <code>git log</code> fait une liste de toutes les révisions faites dans ce dépôt en ordre chronologique inverse. Pour chaque révision, il est indiqué l’identifiant complet (qui commence avec les mêmes caractères que l’identifiant court affiché par la commande <code>git commit</code>réalisée plus tôt), l’auteur de la révision, le moment où elle a été créée et le message de <em>log</em> qui a été donné lorsque la révision a été créée.</p>
 <p>En ce moment, si on exécute <code>ls</code>, on ne voit encore qu’un seul fichier, <code>soir_dhiver.txt</code>. C’est parce que git sauvegarde les informations sur l’historique des fichiers dans le répertoire spécial <code>.git</code> dont on a parlé plus tôt pour ne pas que notre système de fichiers devienne encombré (et pour pas que l’on modifie ou supprime une ancienne version).</p>
 <p>Maintenant, rajoutons des vers dans notre poème.</p>
@@ -131,9 +131,9 @@ On branch master
 Changes not staged for commit:
   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
-  
+
         modified:   soir_dhiver.txt
-        
+
 no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</code></pre>
 <p>La dernière ligne est ce qui est important: aucun changement ajouté au <em>commit</em>. Nous avons changé ce fichier, mais n’avons pas dit à git que nous voulons sauvegarder ces changements (ce que l’on fait avec <code>git add</code>). Faisons cela. C’est une bonne pratique de toujours passer en revue les changements effectués avant de les sauvegarder. On fait cela en utilisant <code>git diff</code>. Cela nous montre les différences entre l’état courant du fichier et la plus récente version sauvegardée:</p>
 <pre><code>$ git diff
@@ -158,7 +158,7 @@ Ah! comme la neige a neigé!
 <pre><code>$ git commit -m &quot;Ajoute des vers au poème&quot;
 On branch master
 Changes not staged for commit:
-    
+
     modified:   soir_dhiver.txt
 
 no changes added to commit</code></pre>
