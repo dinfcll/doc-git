@@ -1,0 +1,2 @@
+pandoc -N --template=mytemplate.tex --variable fontsize=12pt --variable lang=french README.md --latex-engine=xelatex --toc -o example14.pdf
+pandoc -s -S --toc -c pandoc.css -A footer.html README.md -o example3.html
