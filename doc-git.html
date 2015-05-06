@@ -31,31 +31,31 @@
 </div>
 <h1 id="introduction">Introduction</h1>
 <p>Ce document se veut une introduction au système de gestion de versions décentralisé <a href="http://git-scm.com">git</a>. Nous utiliserons l’exemple de git, mais les principes présentés pourraient aussi bien être appliqués à d’autres systèmes du genre comme Mercurial ou BitKeeper.</p>
-<p>Ce document ne veut absolument pas complet quand à l’utilisation de git. L’idée est de présenter les concepts et les commandes de base qui permettent de fonctionner au jour le jour avec un système de gestion de versions. Au fil du temps, vous pourrez par la suite explorer les autres possibilités de git en découvrant graduellement ses autres fonctionnalités, qui peuvent être très puissantes.</p>
+<p>Ce document ne se veut absolument pas complet quand à l’utilisation de git. On veut présenter les concepts et les commandes de base qui permettent de fonctionner au jour le jour avec un système de gestion de versions. Au fil du temps, vous pourrez par la suite explorer les possibilités de git en découvrant graduellement ses autres fonctionnalités, qui en font un outil très puissant.</p>
 <h1 id="pourquoi-utiliser-git">Pourquoi utiliser git?</h1>
-<p>Lorsque l’on développe du code, il n’est pas rare que l’on soit plusieurs à vouloir travailler sur un même bout de code. Cependant, cela peut devenir problématique lorsque l’on veut changer des bouts de code à des endroits différents.</p>
-<p>En utilisant le courriel ou une clé USB on peut s’échanger des bouts de code, mais cela devient rapidement très complexe et il est facile de faire des erreurs lors de l’intégration du code d’un collègue dans le sien.</p>
-<p>Une technique est de travailler chacun son tour: la personne A commence le code, envoie le résultat à une personne B, qui ajoute un autre bout de code et renvoie le tout à la personne A. Ce va-et-vient peut être laborieux et ralentir de beaucoup ce qu’il serait possible de réaliser en travaillant en parallèle.</p>
-<p>Quels seraient donc les avantages d’utiliser la gestion de versions? Cela est mieux puisque :</p>
+<p>Lorsque l’on programme, il n’est pas rare que l’on soit plusieurs à vouloir travailler sur un même bout de code. Cependant, cela peut devenir problématique lorsque l’on veut changer du code à des endroits différents.</p>
+<p>Certaines personnes utilisent le courriel ou une clé USB, mais cela devient rapidement très complexe et il est facile de faire des erreurs lors de l’intégration du code d’un collègue dans le sien.</p>
+<p>Une technique est de travailler chacun son tour: la personne A commence le code, envoie le résultat à une personne B, qui travaille dessus et renvoie le tout à la personne A. Ce va-et-vient peut être laborieux et ralentir de beaucoup ce qu’il serait possible de réaliser en travaillant en parallèle.</p>
+<p>Quels seraient donc les avantages d’utiliser la gestion de versions?</p>
 <ul>
-<li><p>Rien qui est sauvegardé (on dit faire un <em>commit</em>) n’est perdu. Cela veut dire que l’on peut l’utiliser comme la fonctionnalité pour revenir en arrière (<em>undo</em>) d’un éditeur. Par ailleurs, puisque toutes les anciennes versions sont sauvegardées, il est toujours possible de revenir dans le temps et de se replacer dans un état passé.</p></li>
-<li><p>Nous avons une liste des changements qui ont été faits, par qui et quand. On sait donc à qui poser nos questions plus tard.</p></li>
+<li><p>Tout ce qui est sauvegardé (on dit faire un <em>commit</em>) n’est jamais perdu. Cela veut dire que l’on peut l’utiliser comme la fonctionnalité pour revenir en arrière (<em>undo</em>) d’un éditeur. Par ailleurs, puisque toutes les anciennes versions sont sauvegardées, il est toujours possible de revenir dans le temps et de se replacer dans un état passé.</p></li>
+<li><p>Nous avons une liste des changements qui ont été faits, par qui et quand. On sait donc à qui poser nos questions plus tard lorsque ce n’est pas tout à fait clair.</p></li>
 <li><p>C’est difficile (mais pas impossible) de réécrire par-dessus les changements de quelqu’un. Le système de gestion de versions avertit automatiquement l’usager lorqu’il y a un conflit entre deux changements effectués sur la même ligne par deux personnes différentes.</p></li>
 </ul>
-<p>La gestion de versions est essentielle pour tous les projets de développement logiciel significatifs, et la plupart des programmeurs l’utilisent pour leurs petits projets aussi. Ce n’est pas non plus que pour du logiciel: les livres, les notes de cours (comme celles-ci), les petits jeu de données et tout ce qui change à travers le temps et a besoin d’être partagé peut (et devrait) être stocké dans un système de gestion de versions.</p>
+<p>La gestion de versions est essentielle pour tous les projets de développement logiciel d’une certaine ampleur, mais la plupart des programmeurs l’utilisent pour leurs petits projets aussi. Ce n’est pas non plus que pour du logiciel: les livres, les notes de cours (comme celles-ci), les petits jeu de données et tout ce qui change à travers le temps et a besoin d’être partagé peut (et devrait) être stocké dans un système de gestion de versions.</p>
 <h1 id="mise-en-place-de-git">Mise en place de git</h1>
-<p>Nous commencerons par explorer comment la gestion de versions peut être utilisée pour garder une trace de ce qu’une personne a fait, et quand. Même si vous ne collaborez pas avec d’autres personnes, la gestion de versions est beaucoup mieux pour ça. On peut donc éviter de se retrouver avec des noms de fichiers laborieux incluant des VERSION_FINALE_2_olivier ou autres noms du genre, comme illustré dans <a href="http://www.phdcomics.com/comics/archive.php?comicid=1531">une bande dessinée</a> du <em>comic</em> en ligne <a href="http://phdcomics.com">Piled Higher and Deeper</a>.</p>
-<p>Nous avons tous déjà été dans cette situation par le passé. Il est ridicule de se retrouver avec de multiples versions presque identiques d’un même document.</p>
-<p>Les systèmes de gestion de version commencent avec une version de base du document et sauvegardent seulement les changements (les <em>diff</em>) que vous avez faits à chaque étape.</p>
+<p>Commençons par explorer comment la gestion de versions peut être utilisée pour garder une trace de ce qu’une personne a fait, et quand. On peut donc éviter de se retrouver avec des noms de fichiers laborieux incluant des VERSION_FINALE_2_olivier ou autres noms du genre, comme illustré dans <a href="http://www.phdcomics.com/comics/archive.php?comicid=1531">une bande dessinée</a> du <em>comic</em> en ligne <a href="http://phdcomics.com">Piled Higher and Deeper</a>.</p>
+<p>Nous avons tous déjà été dans cette situation par le passé. Il est ridicule de se retrouver avec de multiples versions presqu’identiques d’un même document.</p>
+<p>Les systèmes de gestion de version commencent avec une version de base du document et sauvegardent seulement les changements (le <em>diff</em>) que vous avez faits à chaque étape.</p>
 <div class="figure">
 <img src="seq.png" alt="Le document de base et ses changements" />
 <p class="caption">Le document de base et ses changements</p>
 </div>
 <p>À partir du moment où on commence à voir les changements comme étant séparés du document lui-même, on peut penser à “appliquer” des changements différents sur le document de base et ainsi obtenir des versions différentes du document. Par exemple, deux utilisateurs peuvent faire des changements indépendants sur le même document.</p>
 <h2 id="comment-git-fonctionne">Comment git fonctionne</h2>
-<p>Un système de gestion de versions est un outil qui garde une trace de ces changements pour nous et nous aide à amalgamer tous les changements ensemble. Un système comme git est conçu pour garder de multiples changements synchronisés sur différents ordinateurs et serveurs. C’est pourquoi on dit qu’il s’agit d’un système <em>distribué</em> (par opposition à SVN ou TFS qui sont des systèmes dits centralisés).</p>
+<p>Un système de gestion de versions est un outil qui garde une trace de ces changements pour nous et nous aide à amalgamer tous les changements ensemble. Un système comme git est conçu pour garder de multiples changements synchronisés sur différents ordinateurs et serveurs. C’est pourquoi on dit qu’il s’agit d’un système <em>distribué</em>, par opposition à SVN ou Team Foundation Server, qui sont des systèmes dits centralisés: on doit obligatoirement se connecter au serveur central pour faire un <em>commit</em>.</p>
 <p>Un dépôt (<em>repository</em> en anglais) est un ensemble de fichiers que nous voulons versionner.</p>
-<p>Avec git, chaque utilisateur qui veut faire un changement à un dépôt a sa propre copie des fichiers dans ce dépôt, ainsi que sa copie des changements (les <em>commits</em>) qui ont été faits à ces fichiers. Git garde les <em>commits</em> dans un répertoire caché avec les copies des fichiers.</p>
+<p>Avec git, chaque utilisateur qui veut faire un changement à un dépôt a sa propre copie des fichiers dans ce dépôt, ainsi que sa copie des changements (les <em>commits</em>) qui ont été faits à ceux-ci. Git garde les <em>commits</em> dans un répertoire caché avec les copies des fichiers.</p>
 <h2 id="première-utilisation">Première utilisation</h2>
 <p>La première fois que l’on utilise git sur une nouvelle machine, nous avons besoin de configurer quelques paramètres. Voici comment on procède (dans le terminal):</p>
 <pre><code>$ git config --global user.name &quot;Olivier Lafleur&quot;
@@ -69,7 +69,7 @@ $ git config --global user.email &quot;olivier.lafleur@gmail.com&quot;</code></p
 $ cd poésie</code></pre>
 <p>et disons à git de créer un dépôt - un endroit où git peut stocker les anciennes versions de nos fichiers:</p>
 <pre><code>$ git init</code></pre>
-<p>Si nous utilisons <code>ls</code> pour montrer le contenu du répertoire, on dirait que rien n’a changé. Par contre, si nous ajoutons le <em>flag</em> <code>-a</code> pour ton montrer, on voit que git a créé un répertoire caché appelé <code>.git</code>:</p>
+<p>Si nous utilisons <code>ls</code> pour montrer le contenu du répertoire, on dirait que rien n’a changé. Par contre, si nous ajoutons le <em>flag</em> <code>-a</code> pour tout montrer, on voit que git a créé un répertoire caché appelé <code>.git</code>:</p>
 <pre><code>$ ls -a
 .   ..  .git</code></pre>
 <p>Git stocke l’information sur le projet dans ce sous-répertoire spécial. Si jamais nous le supprimons, nous perdrons l’historique de ce projet.</p>
@@ -79,7 +79,7 @@ On branch master
 Initial commit
 nothing to commit (create/copy files and use &quot;git add&quot; to track)</code></pre>
 <h1 id="suivi-des-modifications">Suivi des modifications</h1>
-<p>Créons tout d’abord un fichier appelé <code>soir_dhiver.txt</code> qui contiendra de la poésie. Vous pouvez utiliser l’éditeur de votre choix pour ce faire. L’important est qu’il soit créé dans le répertoire <code>poésie</code> créé plus haut.</p>
+<p>Créons tout d’abord un fichier appelé <code>soir_dhiver.txt</code> qui contiendra de la poésie. Vous pouvez utiliser l’éditeur de votre choix pour ce faire. L’important est qu’il soit créé dans le répertoire qui est versionné (<code>poésie</code> dans ce cas).</p>
 <p>Entrez le texte suivant dans le fichier <code>soir_dhiver.txt</code>:</p>
 <pre><code>Ah! comme la neige a neigé!</code></pre>
 <p><code>soir_dhiver.txt</code> contient maintenant une seule ligne. Si on demande le statut du projet encore une fois, git nous dit qu’il a remarqué le nouveau fichier:</p>
@@ -90,7 +90,7 @@ Untracked files:
 (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
         soir_dhiver.txt
 nothing added to commit but untracked files present (use &quot;git add&quot; to track)</code></pre>
-<p>Le message <em>Untracked files</em> avec les noms de fichiers écrits en rouge signifie qu’il y a un fichier dans le répertoire dont git ne tient pas compte. Nous pouvons lui dire de le surveiller en utilisant la commande <code>git add</code>:</p>
+<p>Le message <em>Untracked files</em> avec le nom de fichier écrit en rouge signifie qu’il y a un fichier dans le répertoire dont git ne tient pas compte. Nous pouvons lui dire de le surveiller en utilisant la commande <code>git add</code>:</p>
 <pre><code>$ git add soir_dhiver.txt</code></pre>
 <p>et s’assurer que c’est bien ce qui s’est passé:</p>
 <pre><code>$ git status
@@ -101,7 +101,7 @@ Changes to be committed:
 
     new file:   soir_dhiver.txt
       </code></pre>
-<p>On voit que le nom de fichier est maintenant indiqué en vert. Git sait donc qu’il est supposé de surveiller <code>soir_dhiver.txt</code>, mais il n’a pas encore enregistré ces changements comme des <em>commits</em>. Pour lui dire de le faire, nous avons besoin d’exécuter une commande de plus:</p>
+<p>On voit que le nom de fichier est maintenant indiqué en vert. Git sait donc qu’il est supposé surveiller <code>soir_dhiver.txt</code>, mais il n’a pas encore enregistré ces changements comme des <em>commits</em>. Pour lui dire de le faire, nous avons besoin d’exécuter une commande de plus:</p>
 <pre><code>$ git commit -m &quot;Commencer l&#39;écriture du poème&quot;
 [master (root-commit) bef8ac3] Commencer l&#39;écriture du poème
  1 file changed, 1 insertion(+)
@@ -109,19 +109,19 @@ Changes to be committed:
 <p>Quand on exécute la commande <code>git commit</code>, git prend tout ce qu’on lui a dit de sauvegarder lorsqu’on a utilisé la commande <code>git add</code> et le stocke comme une copie permanente à l’intérieur du répertoire spécial <code>.git</code>. Cette copie permanente est appelée une révision et son identifiant court est <code>bef8ac3</code> (votre révision aura un autre identifiant.)</p>
 <p>On utilise le flag <code>-m</code> (pour “message”) pour enregistrer un commentaire court, descriptif et spécifique qui nous aidera plus tard à nous rappeler ce que nous avons fait comme changement, et pourquoi. Si on exécute <code>git commit</code> sans l’option <code>-m</code>, git lancera l’éditeur par défaut afin d’écrire un plus long message, si on le souhaite.</p>
 <p>Un bon message de <em>commit</em> commence avec un bref résumé (moins de 50 caractères) des changements apportés dans ce <em>commit</em>. Si vous voulez donner plus de détails, ajoutez une ligne blanche entre la ligne de résumé et les remarques additionnelles.</p>
-<p>Si on fait <code>git status</code> maintenant:</p>
+<p>Maintenant, si on fait <code>git status</code>, on obtient:</p>
 <pre><code>$ git status
 On branch master
 nothing to commit, working directory clean</code></pre>
-<p>cela nous dit que tout est à jour. Si l’on veut savoir ce que l’on a fait récemment, on peut demander à git de nous montrer l’historique du projet en utilisant <code>git log</code>:</p>
+<p>Il nous dit que tout est à jour. Si l’on veut savoir ce que l’on a fait récemment, on peut demander à git de nous montrer l’historique du projet en utilisant <code>git log</code>:</p>
 <pre><code>$ git log
 commit bef8ac358d77d6e57833947f96a16199bba885ee
 Author: Olivier Lafleur &lt;olivier.lafleur@gmail.com&gt;
 Date:   Tue Mayh 5 09:51:56 2015 -0400
     Commencer l&#39;écriture du poème
         </code></pre>
-<p>La commande <code>git log</code> fait une liste de toutes les révisions faites dans ce dépôt en ordre chronologique inverse. Pour chaque révision, il est indiqué l’identifiant complet (qui commence avec les mêmes caractères que l’identifiant court affiché par la commande <code>git commit</code>réalisée plus tôt), l’auteur de la révision, le moment où elle a été créée et le message de <em>log</em> qui a été donné lorsque la révision a été créée.</p>
-<p>En ce moment, si on exécute <code>ls</code>, on ne voit encore qu’un seul fichier, <code>soir_dhiver.txt</code>. C’est parce que git sauvegarde les informations sur l’historique des fichiers dans le répertoire spécial <code>.git</code> dont on a parlé plus tôt pour ne pas que notre système de fichiers devienne encombré (et pour pas que l’on modifie ou supprime une ancienne version).</p>
+<p>La commande <code>git log</code> fait une liste de toutes les révisions faites dans ce dépôt en ordre chronologique inverse. Pour chaque révision, il est indiqué l’identifiant complet (qui commence avec les mêmes caractères que l’identifiant court affiché par la commande <code>git commit</code> réalisée plus tôt), l’auteur de la révision, le moment où elle a été créée et le message de <em>log</em> qui a été donné lorsque la révision a été créée.</p>
+<p>En ce moment, si on exécute <code>ls</code>, on ne voit encore qu’un seul fichier, <code>soir_dhiver.txt</code>. C’est parce que git sauvegarde les informations sur l’historique des fichiers dans le répertoire spécial <code>.git</code> dont on a parlé plus tôt pour ne pas que notre système de fichiers devienne encombré (et pour ne pas que l’on modifie ou supprime une ancienne version).</p>
 <p>Maintenant, rajoutons des vers dans notre poème.</p>
 <pre><code>Ma vitre est un jardin de givre.
 Ah! comme la neige a neigé!
@@ -137,7 +137,7 @@ Changes not staged for commit:
         modified:   soir_dhiver.txt
 
 no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</code></pre>
-<p>La dernière ligne est ce qui est important: aucun changement ajouté au <em>commit</em>. Nous avons changé ce fichier, mais n’avons pas dit à git que nous voulons sauvegarder ces changements (ce que l’on fait avec <code>git add</code>). Faisons cela. C’est une bonne pratique de toujours passer en revue les changements effectués avant de les sauvegarder. On fait cela en utilisant <code>git diff</code>. Cela nous montre les différences entre l’état courant du fichier et la plus récente version sauvegardée:</p>
+<p>La dernière ligne est ce qui est important: aucun changement ajouté au <em>commit</em>. Nous avons changé ce fichier, mais n’avons pas dit à git que nous voulions sauvegarder ces changements (ce que l’on fait avec <code>git add</code>). Faisons cela. C’est une bonne pratique de toujours passer en revue les changements effectués avant de les sauvegarder. On fait cela en utilisant <code>git diff</code>. Cela nous montre les différences entre l’état courant du fichier et la plus récente version sauvegardée:</p>
 <pre><code>$ git diff
 diff --git a/soir_dhiver.txt b/soir_dhiver.txt
 index 45a1c88..be81340 100644
@@ -187,7 +187,12 @@ Date:   Tue May 5 09:51:56 2015 -0400
 <pre><code>$ git status
 On branch master
 nothing to commit, working directory clean</code></pre>
-<p>Pour récapituler, lorsque nous voulons ajouter des changements à notre dépôt, nous devons d’abord ajouter les fichiers changés (<code>git add</code>) et ensuite <em>commiter</em> les changements au dépôt (<code>git commit</code>).</p>
+<p>Pour récapituler, lorsque nous voulons ajouter des changements à notre dépôt, nous devons:</p>
+<ul>
+<li>ajouter les fichiers changés (<code>git add</code>)</li>
+<li><em>commiter</em> les changements au dépôt (<code>git commit</code>).</li>
+</ul>
+<p>Par ailleurs, lorsqu’on a des changements dans plusieurs fichiers, la commande <code>git add --all .</code> permet d’ajouter tous les changements (y compris les suppressions grâce à l’option <code>--all</code>) dans le répertoire courant (donné en paramètre par le <code>.</code>).</p>
 <h1 id="explorer-lhistorique">Explorer l’historique</h1>
 <p>Si nous voulons voir ce que nous avons changé et quand, il est possible de revenir en arrière dans notre historique.</p>
 <h1 id="auteur">Auteur</h1>
