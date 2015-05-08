@@ -1,2 +1,4 @@
 pandoc -N --template=mytemplate.tex --variable fontsize=12pt --variable lang=french doc-git.md --latex-engine=xelatex --toc -o doc-git.pdf
 pandoc -s -S --toc -c pandoc.css -A footer.html doc-git.md -o doc-git.html
+pandoc doc-git.md -o doc-git.odt
+pandoc -s -S doc-git.md -o doc-git.docx
