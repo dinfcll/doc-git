@@ -9,3 +9,4 @@ Voir la source : [http://swcarpentry.github.io/git-novice/](http://swcarpentry.g
 
 Les corrections et suggestions pour améliorer ce document (sous la forme de courriel 
 ou de pull requests) sont très appréciées.
+

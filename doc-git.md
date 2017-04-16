@@ -1,6 +1,6 @@
 % Introduction à git
 % Olivier Lafleur
-% 4 mai 2015
+% 15 avril 2017
 
 Introduction
 ========
